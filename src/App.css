@@ -34,6 +34,13 @@ small {
   cursive;
 }
 
+.subheader {
+  text-align: center;
+  font-size: 25px;
+  font-family: 'Pacifico',
+  cursive;
+}
+
 .form {
   display: grid;
 }
