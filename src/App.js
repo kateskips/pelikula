@@ -28,7 +28,7 @@ const App = () => {
   return (
     <div className="container">
       <h1 className="title">Pelikula</h1>
-      <SearchForm searchVal={searchVal} setSearchVal={setSearchVal}  />
+      <SearchForm searchVal={searchVal} setSearchVal={setSearchVal} />
       <div className="container">
         <div className="row">
           <div className="col-6 search_results">
