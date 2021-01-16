@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SearchResults from './components/SearchResults';
+import SearchForm from './components/SearchForm';
 import './App.css';
 
 const App = () => {
