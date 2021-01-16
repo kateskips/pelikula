@@ -8,7 +8,7 @@ const SearchForm = (props) => {
                 <label className="label" htmlFor="query">Movie Name</label>
                     <input className="input" type="text" value={props.value}
                         onChange={(event) => props.setSearchVal(event.target.value)}
-                        placeholder="i.e. King Kong"   
+                        placeholder="Search a movie..."   
                     />
                 <button className="button" type="submit">Search</button>
             </form>
