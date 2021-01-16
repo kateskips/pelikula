@@ -1,23 +1,23 @@
 import React from 'react';
 
+
+
 const SearchResults = (props) => {
-
+    const FavoriteNominations = props.favoriteNominations
     return (
-        <div className="card-list">
+        <ul className="card-list">
                 {props.movies.map(movie => (
-                    <div className="card" key={movie.imdbID}>
-                        <img className="card--image"
+                    <li className="card" key={movie.imdbID}>
+                       <img className="card--image"
                             src={movie.Poster} alt={movie.title + 'Poster'}
-                            />
-                        <div className="card--content">
-                        <h3 className="card--title">{movie.Title}</h3>
-                            <p><small>Release Date: {movie.Year}</small></p>
-                            <p className="card--desc">{movie.Plot}</p>
+                />
+                        <div className="card--content card--content-list">
+                            <span className="card--title">{movie.Title} ({movie.Year})</span>
+                            <FavoriteNominations />
                         </div>
-
-                    </div>
+                    </li>
                 ))}
-            </div>    
+        </ul>    
     )
 }
 
