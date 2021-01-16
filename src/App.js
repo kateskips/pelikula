@@ -5,6 +5,7 @@ import './App.css';
 
 const App = () => {
   const [movies, setMovies] = useState([]);
+  const [searchVal, setSearchVal] = useState('')
 
   const getMovies = async () => {
     const url = `http://www.omdbapi.com/?s=${searchVal}&apikey=8fc35db7`
@@ -12,24 +13,29 @@ const App = () => {
     const resp = await fetch(url)
     const responseJson = await resp.json()
 
-    console.log(responseJson)
-    setMovies(responseJson.Search)
+    if (responseJson.Search) {
+     setMovies(responseJson.Search)
+   }
+    
   };
+
   useEffect(() => {
-    getMovies()
-  }, []);
+    getMovies(searchVal);
+  }, [searchVal]);
+  
 
 
   return (
     <div className="container">
       <h1 className="title">Pelikula</h1>
-      <h3 className="subheader">Movie Awards for Entrepreneurs, Con Artists, and Humans</h3>
-      <SearchResults movies={movies} />
+      <SearchForm searchVal={searchVal} setSearchVal={setSearchVal}  />
+      <div className="container">
+        <SearchResults movies={movies} />
+        </div>
     </div>
   )
-
-
 }
+
 
   
     
