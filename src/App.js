@@ -30,7 +30,15 @@ const App = () => {
       <h1 className="title">Pelikula</h1>
       <SearchForm searchVal={searchVal} setSearchVal={setSearchVal}  />
       <div className="container">
-        <SearchResults movies={movies} />
+        <div className="row">
+          <div className="col-6 search_results">
+            <h3>Results</h3>
+            <SearchResults movies={movies} favoriteNominations={AddNominations }/>
+          </div>
+          <div className="col-6 nominated">
+            <Nominations />
+          </div>
+        </div>
         </div>
     </div>
   )
