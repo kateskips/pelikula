@@ -5,43 +5,59 @@ import SearchForm from './components/SearchForm';
 import './App.css';
 
 const App = () => {
-	const [ movies, setMovies ] = useState([]);
-	const [ searchVal, setSearchVal ] = useState('');
-	const [ favorites, setFavorites ] = useState([]);
+  const [movies, setMovies] = useState([]);
+  const [searchVal, setSearchVal] = useState('');
+  const [favorites, setFavorites] = useState({});
+  
+  const getMovies = async () => {
+    const url = `http://www.omdbapi.com/?s=${searchVal}&apikey=8fc35db7`;
 
-	const getMovies = async () => {
-		const url = `http://www.omdbapi.com/?s=${searchVal}&apikey=8fc35db7`;
+    const resp = await fetch(url);
+    const responseJson = await resp.json();
 
-		const resp = await fetch(url);
-		const responseJson = await resp.json();
-
-		if (responseJson.Search) {
-			setMovies(responseJson.Search);
-		}
-	};
-
-	useEffect(
-		() => {
-			getMovies(searchVal);
-		},
-		[ searchVal ]
-	);
-
-	const addFavoriteMovie = (movie) => {
-     setFavorites((f) => [ ...f, movie ])
+    if (responseJson.Search) {
+      setMovies(responseJson.Search);
+    };
   };
 
-	const AddNominations = (props) => {
+  useEffect(
+    () => {
+      getMovies(searchVal);
+    },
+    [searchVal]
+  );
+
+  const addFavoriteMovie = (movie) => {
+    setFavorites((f) => {
+      const temporary = { [movie.imdbID]: movie }
+      return { ...f, ...temporary }
+    });
+  };
+
+  const deleteFavoriteMovie = (movie) => {
+    setFavorites((f) => {
+      const { [movie.imdbID]: _, ...res } = f
+      return res
+    });
+  };
+
+	const AddNomination = (props) => {
 		return (
 			<div className="nominate-button">
         <button onClick={() => addFavoriteMovie(props.movie)}>Nominate</button>
 			</div>
 		);
-	};
-
+  };
+  
+  const DeleteNomination = (props) => {
+		return (
+			<div className="denominate-button">
+        <button onClick={() => deleteFavoriteMovie(props.movie)}>Denominate</button>
+			</div>
+		);
+  };
+  
 	const SearchResults = () => {
-		//const FavoriteNominations = props.favoriteNominations
-
 		return (
 			<ul className="card-list">
 				{movies.map((movie) => (
@@ -51,7 +67,7 @@ const App = () => {
 							<span className="card--title">
 								{movie.Title} ({movie.Year})
               </span>
-              <AddNominations movie={movie} />
+              <AddNomination movie={movie} />
 						</div>
 					</li> 
 				))}
@@ -60,17 +76,16 @@ const App = () => {
   };
   
   const FavoriteResults = () => {
-		//const FavoriteNominations = props.favoriteNominations
-
 		return (
 			<ul className="card-list">
-				{favorites.map((movie) => (
+				{Object.values(favorites).map((movie) => (
 					<li className="card" key={movie.imdbID}>
 						<img className="card--image" src={movie.Poster} alt={movie.title + 'Poster'} />
 						<div className="card--content card--content-list">
 							<span className="card--title">
 								{movie.Title} ({movie.Year})
               </span>
+              <DeleteNomination movie={movie} />
 						</div>
 					</li> 
 				))}
