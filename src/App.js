@@ -99,6 +99,7 @@ const App = () => {
 	return (
 		<div className="container">
 			<h1 className="title">Pelikula</h1>
+			<div className="cute-banner"><img src="https://66.media.tumblr.com/6d88cc218b4404fd04974f4d1188e6d9/tumblr_mqzutnr0BD1rfjowdo1_500.gif" alt="totoro" width="230" height="200"></img></div>
 			<SearchForm searchVal={searchVal} setSearchVal={setSearchVal} />
 			<div className="container">
 				<div className="row">
