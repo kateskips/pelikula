@@ -96,7 +96,14 @@ const App = () => {
 		);
 	};
 
-	// finding a way to have the search show and when not no movies show up.
+	const currentNominations = Object.keys(favorites).length
+	//const maxNominations = 5
+	const nominationAlert = <div>You have selected {currentNominations} movies!</div>
+
+	
+	//alreadyAdded.length > maxNominations 
+
+
 
 	return (
 		<div className="container">
@@ -111,6 +118,7 @@ const App = () => {
 			</div>
 			<SearchForm searchVal={searchVal} setSearchVal={setSearchVal} />
 			<div className="container">
+				{nominationAlert}
 				<div className="row">
 					<div className="col-6 search_results">
 						<h3>Results</h3>
