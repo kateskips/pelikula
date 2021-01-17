@@ -96,14 +96,9 @@ const App = () => {
 		);
 	};
 
-	const currentNominations = Object.keys(favorites).length
-	//const maxNominations = 5
-	const nominationAlert = <div>You have selected {currentNominations} movies!</div>
-
-	
-	//alreadyAdded.length > maxNominations 
-
-
+	//
+	const currentNominations = Object.keys(favorites).length > 4 &&
+		<div className="nomination-banner">You have selected {5} movies!</div>
 
 	return (
 		<div className="container">
@@ -118,7 +113,7 @@ const App = () => {
 			</div>
 			<SearchForm searchVal={searchVal} setSearchVal={setSearchVal} />
 			<div className="container">
-				{nominationAlert}
+				{currentNominations}
 				<div className="row">
 					<div className="col-6 search_results">
 						<h3>Results</h3>
