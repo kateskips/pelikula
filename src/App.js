@@ -5,59 +5,61 @@ import SearchForm from './components/SearchForm';
 import './App.css';
 
 const App = () => {
-  const [movies, setMovies] = useState([]);
-  const [searchVal, setSearchVal] = useState('');
-  const [favorites, setFavorites] = useState({});
-  
-  const getMovies = async () => {
-    const url = `http://www.omdbapi.com/?s=${searchVal}&apikey=8fc35db7`;
+	const [ movies, setMovies ] = useState([]);
+	const [ searchVal, setSearchVal ] = useState('');
+	const [ favorites, setFavorites ] = useState({});
 
-    const resp = await fetch(url);
-    const responseJson = await resp.json();
+	const getMovies = async () => {
+		const url = `http://www.omdbapi.com/?s=${searchVal}&apikey=8fc35db7`;
 
-    if (responseJson.Search) {
-      setMovies(responseJson.Search);
-    };
-  };
+		const resp = await fetch(url);
+		const responseJson = await resp.json();
 
-  useEffect(
-    () => {
-      getMovies(searchVal);
-    },
-    [searchVal]
-  );
+		if (responseJson.Search) {
+			setMovies(responseJson.Search);
+		}
+	};
 
-  const addFavoriteMovie = (movie) => {
-    setFavorites((f) => {
-      const temporary = { [movie.imdbID]: movie }
-      return { ...f, ...temporary }
-    });
-  };
+	useEffect(
+		() => {
+			getMovies(searchVal);
+		},
+		[ searchVal ]
+	);
 
-  const deleteFavoriteMovie = (movie) => {
-    setFavorites((f) => {
-      const { [movie.imdbID]: _, ...res } = f
-      return res
-    });
-  };
+	const addFavoriteMovie = (movie) => {
+		setFavorites((f) => {
+			const temporary = { [movie.imdbID]: movie };
+			return { ...f, ...temporary };
+		});
+	};
 
-  const AddNomination = (props) => {
-    const alreadyAdded = props.movie.imdbID in favorites
+	const deleteFavoriteMovie = (movie) => {
+		setFavorites((f) => {
+			const { [movie.imdbID]: _, ...res } = f;
+			return res;
+		});
+	};
+
+	const AddNomination = (props) => {
+		const alreadyAdded = props.movie.imdbID in favorites;
 		return (
 			<div className="nominate-button">
-        <button onClick={() => addFavoriteMovie(props.movie)} disabled={alreadyAdded}>Nominate</button>
+				<button onClick={() => addFavoriteMovie(props.movie)} disabled={alreadyAdded}>
+					Nominate
+				</button>
 			</div>
 		);
-  };
-  
-  const DeleteNomination = (props) => {
+	};
+
+	const DeleteNomination = (props) => {
 		return (
 			<div className="denominate-button">
-        <button onClick={() => deleteFavoriteMovie(props.movie)}>Denominate</button>
+				<button onClick={() => deleteFavoriteMovie(props.movie)}>Denominate</button>
 			</div>
 		);
-  };
-  
+	};
+
 	const SearchResults = () => {
 		return (
 			<ul className="card-list">
@@ -67,16 +69,16 @@ const App = () => {
 						<div className="card--content card--content-list">
 							<span className="card--title">
 								{movie.Title} ({movie.Year})
-              </span>
-              <AddNomination movie={movie} />
+							</span>
+							<AddNomination movie={movie} />
 						</div>
-					</li> 
+					</li>
 				))}
 			</ul>
 		);
-  };
-  
-  const FavoriteResults = () => {
+	};
+
+	const FavoriteResults = () => {
 		return (
 			<ul className="card-list">
 				{Object.values(favorites).map((movie) => (
@@ -85,10 +87,10 @@ const App = () => {
 						<div className="card--content card--content-list">
 							<span className="card--title">
 								{movie.Title} ({movie.Year})
-              </span>
-              <DeleteNomination movie={movie} />
+							</span>
+							<DeleteNomination movie={movie} />
 						</div>
-					</li> 
+					</li>
 				))}
 			</ul>
 		);
@@ -99,19 +101,24 @@ const App = () => {
 	return (
 		<div className="container">
 			<h1 className="title">Pelikula</h1>
-			<div className="cute-banner"><img src="https://66.media.tumblr.com/6d88cc218b4404fd04974f4d1188e6d9/tumblr_mqzutnr0BD1rfjowdo1_500.gif" alt="totoro" width="230" height="200"></img></div>
+			<div className="cute-banner">
+				<img
+					src="https://66.media.tumblr.com/6d88cc218b4404fd04974f4d1188e6d9/tumblr_mqzutnr0BD1rfjowdo1_500.gif"
+					alt="totoro"
+					width="230"
+					height="200"
+				/>
+			</div>
 			<SearchForm searchVal={searchVal} setSearchVal={setSearchVal} />
 			<div className="container">
 				<div className="row">
 					<div className="col-6 search_results">
 						<h3>Results</h3>
-						<SearchResults
-						/>
+						<SearchResults />
 					</div>
 					<div className="col-6 nominated">
 						<h3>Nominations</h3>
-						<FavoriteResults
-						/>
+						<FavoriteResults />
 					</div>
 				</div>
 			</div>
