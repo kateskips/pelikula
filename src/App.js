@@ -41,10 +41,11 @@ const App = () => {
     });
   };
 
-	const AddNomination = (props) => {
+  const AddNomination = (props) => {
+    const alreadyAdded = props.movie.imdbID in favorites
 		return (
 			<div className="nominate-button">
-        <button onClick={() => addFavoriteMovie(props.movie)}>Nominate</button>
+        <button onClick={() => addFavoriteMovie(props.movie)} disabled={alreadyAdded}>Nominate</button>
 			</div>
 		);
   };
