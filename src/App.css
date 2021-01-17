@@ -95,3 +95,16 @@ h3 {
   font-family: 'Roboto', sans-serif;
 }
 
+div.cute-banner {
+  text-align: center;
+  width: 500px;
+  height: 200px;
+  margin: auto;
+}
+
+div.nomination-banner {
+  text-align: center;
+  width: 500px;
+  margin: auto;
+  border: 3px solid rgb(233, 126, 32);
+}

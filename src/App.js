@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
 import SearchForm from './components/SearchForm';
-//import AddNominations from './components/AddNominations';
 import './App.css';
 
 const App = () => {
@@ -96,9 +94,10 @@ const App = () => {
 		);
 	};
 
-	//
-	const currentNominations = Object.keys(favorites).length > 4 &&
+	
+	const currentNominations = Object.keys(favorites).length > 4 && (
 		<div className="nomination-banner">You have selected {5} movies!</div>
+	);
 
 	return (
 		<div className="container">
@@ -107,7 +106,7 @@ const App = () => {
 				<img
 					src="https://66.media.tumblr.com/6d88cc218b4404fd04974f4d1188e6d9/tumblr_mqzutnr0BD1rfjowdo1_500.gif"
 					alt="totoro"
-					width="230"
+					width="250"
 					height="200"
 				/>
 			</div>
