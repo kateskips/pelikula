@@ -4,5 +4,5 @@ Pelikula is a movie nomination app where you search for the movies you like and 
 This is the Shopify Challenge
 
 To start click the link 
-http://kateskips.github.io/pelikula
+https://pelikula.klgf.dev
 
